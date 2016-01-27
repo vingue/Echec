@@ -6,38 +6,31 @@ using System.Threading.Tasks;
 
 namespace Chess
 {
-    class Fou : Piece
+    class Dame : Piece
     {
         // constructeur
-        public Fou(int horizontal, int vertical, bool white)
-            : base(horizontal, vertical, white) {
+        public Dame(int horizontal, int vertical, bool white)
+            : base(horizontal, vertical, white)
+        {
         }
 
         public override void mouvement()
         {
-            Console.WriteLine("Mouvement en diagonales");
+            Console.WriteLine("Mouvement en diagonales et droits");
         }
 
         public override string display()
         {
-            return String.Format("F");
+            return String.Format("D");
         }
 
         public override void atteinte()
         {
-            //for (int var = horizontal - 1; var >= 0; var--)
-            //{
-            //    if (!(Program.plateau[var, vertical] is Piece))
-            //        listeMouv.Add(Program.plateau[var, vertical]);
-            //    else
-            //        break;
-            //}
-
             int diffHori = 1;
             int diffVerti = 1;
-            while((horizontal+diffHori)<8 && (vertical+diffVerti)<8)
+            while ((horizontal + diffHori) < 8 && (vertical + diffVerti) < 8)
             {
-                if (!(Program.plateau[horizontal+diffHori, vertical+diffVerti] is Piece))
+                if (!(Program.plateau[horizontal + diffHori, vertical + diffVerti] is Piece))
                     listeMouv.Add(Program.plateau[horizontal + diffHori, vertical + diffVerti]);
                 else
                     break;
@@ -79,6 +72,38 @@ namespace Chess
                     break;
                 diffHori++;
                 diffVerti--;
+            }
+
+            for (int var = horizontal - 1; var >= 0; var--)
+            {
+                if (!(Program.plateau[var, vertical] is Piece))
+                    listeMouv.Add(Program.plateau[var, vertical]);
+                else
+                    break;
+            }
+
+            for (int var = horizontal + 1; var < 8; var++)
+            {
+                if (!(Program.plateau[var, vertical] is Piece))
+                    listeMouv.Add(Program.plateau[var, vertical]);
+                else
+                    break;
+            }
+
+            for (int var = vertical - 1; var >= 0; var--)
+            {
+                if (!(Program.plateau[horizontal, var] is Piece))
+                    listeMouv.Add(Program.plateau[horizontal, var]);
+                else
+                    break;
+            }
+
+            for (int var = vertical + 1; var < 8; var++)
+            {
+                if (!(Program.plateau[horizontal, var] is Piece))
+                    listeMouv.Add(Program.plateau[horizontal, var]);
+                else
+                    break;
             }
 
             for (int i = 0; i < listeMouv.Count; i++)

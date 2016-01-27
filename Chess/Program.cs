@@ -10,17 +10,17 @@ namespace Chess
     {
         public static Case[,] plateau = new Case[8, 8];
         static char[] colonne = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+        static List<Case> list = null;
 
         static void Main(string[] args)
         {
             init();
+            plateau[2, 2] = new Dame(2, 2, true);
+            
+            Piece test = (Piece)plateau[2, 2];
+            test.atteinte();
+            list = test.getList();
             affiche();
-            while(true)
-            {
-                Piece test = (Piece)plateau[1, 2];
-                test.atteinte();
-                interroge();
-            }
         }
 
         public static void init()
@@ -35,17 +35,17 @@ namespace Chess
                         initPiece(i, true);
                         break;
 
-                    case 1:
-                        initPion(i, true);
-                        break;
+                    //case 1:
+                    //    initPion(i, true);
+                    //    break;
 
-                    case 6:
-                        initPion(i, false);
-                        break;
+                    //case 6:
+                    //    initPion(i, false);
+                    //    break;
 
-                    case 7:
-                        initPiece(i, false);
-                        break;
+                    //case 7:
+                    //    initPiece(i, false);
+                    //    break;
 
                     default:
                         initCaseVide(i);
@@ -77,7 +77,7 @@ namespace Chess
             plateau[ligne, 0] = new Tour(ligne, 0, color);
             plateau[ligne, 1] = new Cavalier(ligne, 1, color);
             plateau[ligne, 2] = new Fou(ligne, 2, color);
-            plateau[ligne, 3] = new Reine(ligne, 3, color);
+            plateau[ligne, 3] = new Dame(ligne, 3, color);
             plateau[ligne, 4] = new Roi(ligne, 4, color);
             plateau[ligne, 5] = new Fou(ligne, 5, color);
             plateau[ligne, 6] = new Cavalier(ligne, 6, color);
@@ -110,15 +110,22 @@ namespace Chess
                 Console.Write((i + 1));
                 for (j = 0; j < 8; j++)
                 {
-                    if(plateau[i,j] is Piece)
+                    Console.Write(" ");
+                    if (list != null && list.Any(test => test.Equals(plateau[i,j])))
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                    }
+                    if (plateau[i,j] is Piece)
                     {
                         affichePiece((Piece)plateau[i, j]);
                     }
                     else
                     {
-                        Console.Write(" " + plateau[i, j].display());
+
+                        Console.Write(plateau[i, j].display());
                     }
-                    
+                    Console.BackgroundColor = ConsoleColor.Black;
+
                     if (j == 7)
                         Console.WriteLine("");
                 }
@@ -127,18 +134,20 @@ namespace Chess
 
         public static void affichePiece(Piece piece)
         {
-            if(piece.getColor())
+            
+            if (piece.getColor())
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(" " + plateau[piece.getHorizontal(), piece.getVertical()].display());
+                Console.Write( plateau[piece.getHorizontal(), piece.getVertical()].display());
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write(" " + plateau[piece.getHorizontal(), piece.getVertical()].display());
+                Console.Write( plateau[piece.getHorizontal(), piece.getVertical()].display());
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
+            
         }
 
         public static void interroge()

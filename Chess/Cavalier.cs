@@ -26,7 +26,25 @@ namespace Chess
 
         public override void atteinte()
         {
-            throw new NotImplementedException();
+            int[,] combinaison = new int[8, 2] { 
+                { horizontal + 1, vertical + 2 },{ horizontal + 2, vertical + 1 },
+                { horizontal + 1, vertical - 2 },{ horizontal + 2, vertical - 1 },
+                {horizontal-1,vertical+2 }, {horizontal-2, vertical+1 },
+                {horizontal-1,vertical-2 }, {horizontal-2, vertical-1 } };
+
+            for(int i=0;i<8;i++)
+            {
+                if (!(Program.plateau[combinaison[i,0], combinaison[i,1]] is Piece))
+                {
+                    listeMouv.Add(Program.plateau[combinaison[i, 0], combinaison[i, 1]]);
+                }
+            }
+
+            for (int i = 0; i < listeMouv.Count; i++)
+            {
+                Console.Write(listeMouv[i].ToString() + " ");
+            }
+            Console.WriteLine("");
         }
     }
 }

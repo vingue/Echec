@@ -48,5 +48,10 @@ namespace Chess
         {
             return this.vertical;
         }
+
+        public List<Case> getList()
+        {
+            return this.listeMouv;
+        }
     }
 }
