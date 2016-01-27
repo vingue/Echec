@@ -1,0 +1,12 @@
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\C#\Chess\Chess\bin\Debug\Chess.exe.config
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\C#\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\C#\Chess\Chess\bin\Debug\Chess.pdb
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\C#\Chess\Chess\obj\Debug\Chess.csprojResolveAssemblyReference.cache
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\C#\Chess\Chess\obj\Debug\Chess.exe
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\C#\Chess\Chess\obj\Debug\Chess.pdb
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\Chess\Chess\bin\Debug\Chess.exe.config
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\Chess\Chess\obj\Debug\Chess.exe
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\Chess\Chess\obj\Debug\Chess.pdb
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\Chess\Chess\bin\Debug\Chess.pdb
+C:\Users\Vincent\Documents\Visual Studio 2015\Projects\Chess\Chess\obj\Debug\Chess.csprojResolveAssemblyReference.cache
