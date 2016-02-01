@@ -26,10 +26,18 @@ namespace Chess
 
         public override void atteinte()
         {
+            Piece blackOrWhite = null;
             for(int var = horizontal-1; var>=0;var--)
             {
                 if (!(Program.plateau[var, vertical] is Piece))
                     listeMouv.Add(Program.plateau[var, vertical]);
+                else if (Program.plateau[var, vertical] is Piece)
+                {
+                    blackOrWhite = (Piece)Program.plateau[var, vertical];
+                    if (blackOrWhite.getColor() != white)
+                        listeMouv.Add(Program.plateau[var, vertical]);
+                    break;
+                }
                 else
                     break;
             }
@@ -38,6 +46,13 @@ namespace Chess
             {
                 if (!(Program.plateau[var, vertical] is Piece))
                     listeMouv.Add(Program.plateau[var, vertical]);
+                else if (Program.plateau[var, vertical] is Piece)
+                {
+                    blackOrWhite = (Piece)Program.plateau[var, vertical];
+                    if (blackOrWhite.getColor() != white)
+                        listeMouv.Add(Program.plateau[var, vertical]);
+                    break;
+                }
                 else
                     break;
             }
@@ -46,6 +61,13 @@ namespace Chess
             {
                 if (!(Program.plateau[horizontal, var] is Piece))
                     listeMouv.Add(Program.plateau[horizontal, var]);
+                else if (Program.plateau[horizontal, var] is Piece)
+                {
+                    blackOrWhite = (Piece)Program.plateau[horizontal, var];
+                    if (blackOrWhite.getColor() != white)
+                        listeMouv.Add(Program.plateau[horizontal, var]);
+                    break;
+                }
                 else
                     break;
             }
@@ -54,6 +76,13 @@ namespace Chess
             {
                 if (!(Program.plateau[horizontal, var] is Piece))
                     listeMouv.Add(Program.plateau[horizontal, var]);
+                else if (Program.plateau[horizontal, var] is Piece)
+                {
+                    blackOrWhite = (Piece)Program.plateau[horizontal, var];
+                    if (blackOrWhite.getColor() != white)
+                        listeMouv.Add(Program.plateau[horizontal, var]);
+                    break;
+                }
                 else
                     break;
             }

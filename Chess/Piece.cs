@@ -9,7 +9,7 @@ namespace Chess
     abstract class Piece : Case
     {
 
-        private bool white;
+        protected bool white;
         protected List<Case> listeMouv;
 
         public Piece(int horizontal, int vertical, bool white) : base(horizontal, vertical)
@@ -39,19 +39,44 @@ namespace Chess
             return this.white;
         }
 
-        public int getHorizontal()
+        public void setColor(bool color)
         {
-            return this.horizontal;
-        }
-
-        public int getVertical()
-        {
-            return this.vertical;
+            this.white = color;
         }
 
         public List<Case> getList()
         {
             return this.listeMouv;
+        }
+
+        public static Piece construct(string nom, int horizontal, int vertical, bool color)
+        {
+            Piece obj;
+            switch (nom)
+            {
+                case "Pion":
+                    obj = new Pion(horizontal, vertical, color);
+                    break;
+                case "Tour":
+                    obj = new Tour(horizontal, vertical, color);
+                    break;
+                case "Fou":
+                    obj = new Fou(horizontal, vertical, color);
+                    break;
+                case "Cavalier":
+                    obj = new Cavalier(horizontal, vertical, color);
+                    break;
+                case "Roi":
+                    obj = new Roi(horizontal, vertical, color);
+                    break;
+                case "Dame":
+                    obj = new Dame(horizontal, vertical, color);
+                    break;
+                default:
+                    obj = null;
+                    break;
+            }
+            return obj;
         }
     }
 }

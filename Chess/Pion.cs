@@ -25,10 +25,27 @@ namespace Chess
 
         public override void atteinte()
         {
-            
-            if (!(Program.plateau[horizontal + 1, vertical] is Piece))
+            int mov;
+            if (white)
+                mov=1;
+            else
+                mov=-1;
+            Piece blackOrWhite = null;
+            if (!(Program.plateau[horizontal + mov, vertical] is Piece))
             {
-                listeMouv.Add(Program.plateau[horizontal + 1, vertical]);
+                listeMouv.Add(Program.plateau[horizontal + mov, vertical]);
+            }
+            if (Program.plateau[horizontal + mov, vertical+1] is Piece)
+            {
+                blackOrWhite = (Piece)Program.plateau[horizontal + mov, vertical+1];
+                if (blackOrWhite.getColor() != white)
+                    listeMouv.Add(Program.plateau[horizontal + mov, vertical+1]);
+            }
+            if (Program.plateau[horizontal + mov, vertical - 1] is Piece)
+            {
+                blackOrWhite = (Piece)Program.plateau[horizontal + mov, vertical - 1];
+                if (blackOrWhite.getColor() != white)
+                    listeMouv.Add(Program.plateau[horizontal + mov, vertical - 1]);
             }
             for (int i =0; i<listeMouv.Count; i++)
             {

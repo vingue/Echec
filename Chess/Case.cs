@@ -27,5 +27,25 @@ namespace Chess
         {
             return String.Format("0");
         }
+
+        public int getHorizontal()
+        {
+            return this.horizontal;
+        }
+
+        public int getVertical()
+        {
+            return this.vertical;
+        }
+
+        public void setHorizontal(int val)
+        {
+            this.horizontal = val;
+        }
+
+        public void setVertical(int val)
+        {
+            this.vertical = val;
+        }
     }
 }

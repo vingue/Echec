@@ -11,16 +11,33 @@ namespace Chess
         public static Case[,] plateau = new Case[8, 8];
         static char[] colonne = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
         static List<Case> list = null;
+        static Piece roiBlanc = (Piece)plateau[0,4];
+        static Piece roiNoir=(Piece)plateau[7,4];
 
         static void Main(string[] args)
         {
+            bool joueur = true;
             init();
-            plateau[2, 2] = new Dame(2, 2, true);
+            //plateau[2, 0] = new Cavalier(2, 0, false);
             
-            Piece test = (Piece)plateau[2, 2];
-            test.atteinte();
-            list = test.getList();
+            
             affiche();
+            //Console.WriteLine(plateau[2, 0].GetType().Name);
+            //Console.WriteLine(plateau[3, 3].GetType().Name);
+            while(true)
+            {
+                tour(joueur);
+                Console.Clear();
+                affiche();
+                if(joueur)
+                {
+                    Console.WriteLine(roiBlanc.ToString());
+                } else
+                {
+                    Console.WriteLine(roiNoir.ToString());
+                }
+                joueur = !joueur;
+            }
         }
 
         public static void init()
@@ -43,9 +60,9 @@ namespace Chess
                     //    initPion(i, false);
                     //    break;
 
-                    //case 7:
-                    //    initPiece(i, false);
-                    //    break;
+                    case 7:
+                        initPiece(i, false);
+                        break;
 
                     default:
                         initCaseVide(i);
@@ -113,10 +130,12 @@ namespace Chess
                     Console.Write(" ");
                     if (list != null && list.Any(test => test.Equals(plateau[i,j])))
                     {
-                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
                     }
                     if (plateau[i,j] is Piece)
                     {
+                        if (list != null && list.Any(test => test.Equals(plateau[i, j])))
+                            Console.BackgroundColor = ConsoleColor.Red;
                         affichePiece((Piece)plateau[i, j]);
                     }
                     else
@@ -184,6 +203,96 @@ namespace Chess
                 }
             }
             return index;
+        }
+
+        public static void echange(Piece piece, Case echange)
+        {
+            //Piece swapP=piece;
+            //Case swapC = echange;
+            plateau[piece.getHorizontal(), piece.getVertical()] = new Case(piece.getHorizontal(), piece.getVertical());
+            plateau[echange.getHorizontal(), echange.getVertical()] = Piece.construct(piece.GetType().Name, echange.getHorizontal(), echange.getVertical(), piece.getColor());
+        }
+
+        public static void eliminer(Piece piece, Piece echange)
+        {
+            //Piece swapP=piece;
+            //Case swapC = echange;
+            plateau[piece.getHorizontal(), piece.getVertical()] = new Case(piece.getHorizontal(), piece.getVertical());
+            plateau[echange.getHorizontal(), echange.getVertical()] = Piece.construct(piece.GetType().Name, echange.getHorizontal(), echange.getVertical(), piece.getColor());
+        }
+
+        public static void tour(bool joueur)
+        {
+            int horizontal;
+            int vertical;
+            int newHorizontal;
+            int newVertical;
+            Piece select = new Pion(9, 9, true);
+            if(joueur)
+            {
+                Console.WriteLine("Joueur blanc c'est à vous.");
+            }
+            else
+            {
+                Console.WriteLine("Joueur noir c'est à vous.");
+            }
+            do
+            {
+                Console.Write("Entrer la valeur horizontale de votre piece: ");
+                horizontal = readHorizon();
+                Console.Write("Entrer la valeur verticale de votre piece: ");
+                vertical = readVertical();
+                if (plateau[horizontal, vertical] is Piece)
+                    select = (Piece)plateau[horizontal, vertical];
+                else
+                    continue;
+            } while (select.getColor()!=joueur);
+            select = (Piece)plateau[horizontal, vertical];
+            select.atteinte();
+            list = select.getList();
+            Console.Clear();
+            affiche();
+            
+            do
+            {
+                Console.Write("Entrer la valeur horizontale de la case cible: ");
+                newHorizontal = readHorizon();
+                Console.Write("Entrer la valeur verticale de la case cible: ");
+                newVertical = readVertical();
+            } while (!(list.Any(test => test.Equals(plateau[newHorizontal, newVertical]))));
+
+            if (!(plateau[newHorizontal, newVertical] is Piece))
+            {
+                echange((Piece)plateau[horizontal, vertical], plateau[newHorizontal, newVertical]);
+                if (plateau[newHorizontal, newVertical] is Roi)
+                {
+                    mouvRoi((Piece)plateau[newHorizontal, newVertical], joueur);
+                }
+            }
+            else
+            {
+                echange((Piece)plateau[horizontal, vertical], (Piece)plateau[newHorizontal, newVertical]);
+                if(plateau[newHorizontal,newVertical] is Roi)
+                {
+                    mouvRoi((Piece)plateau[newHorizontal, newVertical], joueur);
+                }
+            }
+            select = (Piece)plateau[newHorizontal, newVertical];
+            select.atteinte();
+            list = select.getList();
+            list = null;
+        }
+
+        public static void mouvRoi(Piece roi, bool color)
+        {
+            if(color)
+            {
+                roiBlanc = roi;
+            }
+            else
+            {
+                roiNoir = roi;
+            }
         }
     }
 }
